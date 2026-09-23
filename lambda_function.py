@@ -139,7 +139,7 @@ def lambda_handler(event, context):
 
     try:
         api_key = get_calendly_api_key()
-        print(api_key)
+        # print(api_key)
 
         # Fetch Calendly Data
         calendly_df = fetch_calendly_scheduled_calls(api_key)
