@@ -119,9 +119,15 @@ def fetch_calendly_scheduled_calls(api_key):
     return pd.DataFrame(all_events)
 
 
+
 def calculate_metrics(calendly_df):
     total_scheduled_calls = len(calendly_df)
-    completed_calls = calendly_df[calendly_df["status"] == "completed"].shape[0]
+
+    if calendly_df.empty or "status" not in calendly_df.columns:
+        completed_calls = 0
+    else:
+        completed_calls = calendly_df[calendly_df["status"] == "completed"].shape[0]
+
     completed_calls_percentage = (completed_calls / total_scheduled_calls) * 100 if total_scheduled_calls > 0 else 0
 
     metrics_data = {
